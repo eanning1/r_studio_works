@@ -1,4 +1,4 @@
-# Problem 2: ATM Withdrawal Forecasting
+# ATM Withdrawal Forecasting
 # Load required libraries
 library(ggplot2)
 library(dplyr)

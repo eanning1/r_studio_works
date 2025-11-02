@@ -1,8 +1,8 @@
-# Problem 1: Error Clustering Analysis
+# Error Clustering Analysis
 
-install.packages(c("ggplot2", "dplyr", "tidyr", "lubridate", "gridExtra"))
+#install.packages(c("ggplot2", "dplyr", "tidyr", "lubridate", "gridExtra"))
 
-install.packages("ggplot2")
+#install.packages("ggplot2")
 
 
 # Load required libraries
