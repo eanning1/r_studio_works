@@ -1,8 +1,13 @@
-# ATM Withdrawal Forecasting
+#**************** ATM Withdrawal Forecasting **********************#
+
+
+
 # Load required libraries
 library(ggplot2)
 library(dplyr)
 library(lubridate)
+
+cat("\014") # Clearing Console
 
 # Load the data
 data_path <- "D:\\Codes\\R_Codes\\r_studio_works\\raw_data\\ATM10_data.rds"
@@ -31,21 +36,21 @@ forecast_atm <- function(data, unit_id, forecast_start = "2009-02-02",
     )
   
   # Calculate patterns
-  # 1. Day of week effect
+  # Day of week effect
   weekday_avg <- unit_data %>%
     filter(holiday == 0) %>%
     group_by(weekday) %>%
     summarise(avg_withdrawn = mean(withdrawn, na.rm = TRUE))
   
-  # 2. Overall average for holidays
+  # Overall average for holidays
   holiday_avg <- mean(unit_data$withdrawn[unit_data$holiday == 1], na.rm = TRUE)
   
-  # 3. Monthly trend
+  # Monthly trend
   monthly_avg <- unit_data %>%
     group_by(year, month) %>%
     summarise(avg_withdrawn = mean(withdrawn, na.rm = TRUE), .groups = 'drop')
   
-  # 4. Calculate yearly seasonality (for same period last year)
+  # Calculate yearly seasonality (for same period last year)
   unit_data <- unit_data %>%
     mutate(month_day = format(ymd, "%m-%d"))
   
@@ -112,7 +117,7 @@ forecast_atm <- function(data, unit_id, forecast_start = "2009-02-02",
 # Generate Forecasts for All ATMs and Create PDF
 # ============================================================================
 
-pdf("ATM_Forecasts.pdf", width = 11, height = 8.5)
+pdf("D:\\Codes\\R_Codes\\r_studio_works\\processed_data\\ATM_Forecasts.pdf", width = 11, height = 8.5)
 
 # Get unique units
 units <- sort(unique(atm_data$unit))
@@ -196,7 +201,7 @@ forecast_wide <- forecast_summary %>%
               values_from = predicted,
               names_prefix = "ATM_")
 
-write.csv(forecast_wide, "ATM_Forecasts_Summary.csv", row.names = FALSE)
+write.csv(forecast_wide, "D:\\Codes\\R_Codes\\r_studio_works\\processed_data\\ATM_Forecasts_Summary.csv", row.names = FALSE)
 
 cat("Forecast summary saved to 'ATM_Forecasts_Summary.csv'\n")
 
@@ -212,3 +217,4 @@ for (unit_id in units) {
       "| Min:", round(min(forecast_values), 0),
       "| Max:", round(max(forecast_values), 0), "\n")
 }
+
