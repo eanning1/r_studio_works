@@ -18,19 +18,25 @@ errors <- readRDS(data_path)
 
 # Convert error.time to POSIXct if not already
 errors$error.time <- as.POSIXct(errors$error.time)
+#errors$error.time
+
+
+
 
 # ============================================================================
-# TASK (i): Graphical Overview of the Data
+# Graphical Overview of the Data
 # ============================================================================
 
-# 1. Distribution of errors over time
+# Distribution of errors over time
 p1 <- ggplot(errors, aes(x = error.time)) +
   geom_histogram(bins = 50, fill = "steelblue", alpha = 0.7) +
   labs(title = "Distribution of Errors Over Time",
        x = "Date", y = "Number of Errors") +
   theme_minimal()
 
-# 2. Errors by service
+# p1
+
+# Errors by service
 service_counts <- errors %>%
   group_by(service) %>%
   summarise(count = n()) %>%
@@ -43,8 +49,9 @@ p2 <- ggplot(service_counts %>% top_n(20, count),
   labs(title = "Top 20 Services by Error Count",
        x = "Service", y = "Number of Errors") +
   theme_minimal()
+# p2
 
-# 3. Errors by laptop
+# Errors by laptop
 laptop_counts <- errors %>%
   group_by(laptop) %>%
   summarise(count = n()) %>%
@@ -55,8 +62,10 @@ p3 <- ggplot(laptop_counts, aes(x = count)) +
   labs(title = "Distribution of Errors Across Laptops",
        x = "Number of Errors per Laptop", y = "Frequency") +
   theme_minimal()
+#p3
 
-# 4. Errors on special days vs regular days
+
+# Errors on special days vs regular days
 special_day_summary <- errors %>%
   group_by(special.day) %>%
   summarise(count = n()) %>%
@@ -70,7 +79,9 @@ p4 <- ggplot(special_day_summary, aes(x = day_type, y = count, fill = day_type))
   theme_minimal() +
   theme(legend.position = "none")
 
-# 5. Hourly pattern of errors
+#p4
+
+# Hourly pattern of errors
 errors$hour <- hour(errors$error.time)
 hourly_pattern <- errors %>%
   group_by(hour) %>%
@@ -83,7 +94,9 @@ p5 <- ggplot(hourly_pattern, aes(x = hour, y = count)) +
        x = "Hour of Day", y = "Number of Errors") +
   theme_minimal()
 
-# 6. Day of week pattern
+#p5
+
+# Day of week pattern
 errors$weekday <- wday(errors$error.time, label = TRUE)
 weekday_pattern <- errors %>%
   group_by(weekday) %>%
@@ -95,21 +108,28 @@ p6 <- ggplot(weekday_pattern, aes(x = weekday, y = count, fill = weekday)) +
        x = "Day of Week", y = "Number of Errors") +
   theme_minimal() +
   theme(legend.position = "none")
+#p6
+
 
 # Save all plots to PDF
-pdf("Error_Analysis_Overview.pdf", width = 11, height = 8.5)
+pdf("D:\\Codes\\R_Codes\\r_studio_works\\processed_data\\Error_Analysis_Overview.pdf", width = 11, height = 8.5)
 print(p1)
 print(p2)
 print(p3)
 print(p4)
 print(p5)
 print(p6)
-dev.off()
+dev.off() # ensuring the file is completely saved
 
 cat("Graphical overview saved to 'Error_Analysis_Overview.pdf'\n")
 
+
+
+
+
+
 # ============================================================================
-# TASK (ii): Identify Trigger Services
+# Identify Trigger Services
 # ============================================================================
 
 # Function to find triggered errors within 10 seconds
