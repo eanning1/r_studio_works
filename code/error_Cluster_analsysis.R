@@ -13,7 +13,7 @@ library(lubridate)
 library(gridExtra)
 
 # Load the data
-data_path <- "C:\\Users\\RBGH GIS Officer\\OneDrive\\Desktop\\Document\\data_science\\Errors_company01.rds"
+data_path <- "D:\\Codes\\R_Codes\\r_studio_works\\raw_data\\Errors_company01.rds"
 errors <- readRDS(data_path)
 
 # Convert error.time to POSIXct if not already

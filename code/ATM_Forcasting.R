@@ -5,7 +5,7 @@ library(dplyr)
 library(lubridate)
 
 # Load the data
-data_path <- "C:\\Users\\RBGH GIS Officer\\OneDrive\\Desktop\\Document\\data_science\\ATM10_data.rds"
+data_path <- "D:\\Codes\\R_Codes\\r_studio_works\\raw_data\\ATM10_data.rds"
 atm_data <- readRDS(data_path)
 
 # Convert ymd to Date format
