@@ -3,7 +3,7 @@
 #install.packages(c("ggplot2", "dplyr", "tidyr", "lubridate", "gridExtra"))
 
 #install.packages("ggplot2")
-cat("\014")
+cat("\014") # Clearing console
 
 # Load required libraries
 library(ggplot2)
