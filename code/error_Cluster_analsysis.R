@@ -217,7 +217,7 @@ if (!is.null(triggers) && nrow(triggers) > 0) {
   print(triggers, row.names = FALSE)
   
   # Save to CSV
-  write.csv(triggers, "Trigger_Services.csv", row.names = FALSE)
+  write.csv(triggers, "D:\\Codes\\R_Codes\\r_studio_works\\processed_data\\D:\\Codes\\R_Codes\\r_studio_works\\processed_data\\Trigger_Services.csv", row.names = FALSE)
   
   # Create visualization
   p_triggers <- ggplot(triggers %>% top_n(20, probability), 
@@ -231,7 +231,7 @@ if (!is.null(triggers) && nrow(triggers) > 0) {
          y = "Trigger Probability") +
     theme_minimal()
   
-  pdf("Trigger_Services_Visualization.pdf", width = 10, height = 8)
+  pdf("D:\\Codes\\R_Codes\\r_studio_works\\processed_data\\Trigger_Services_Visualization.pdf", width = 10, height = 8)
   print(p_triggers)
   dev.off()
   
@@ -249,3 +249,4 @@ cat("Date range:", as.character(min(errors$error.time)), "to",
     as.character(max(errors$error.time)), "\n")
 cat("Errors on special days:", sum(errors$special.day == 1), "\n")
 cat("Errors on regular days:", sum(errors$special.day == 0), "\n")
+
